@@ -22,7 +22,7 @@
 ```ocaml
 // example code
 
-* say-hi (1)
+* say-hi ()
 |      "=":s 12:int8 *  'io.out 12 times
 |      "Hello world!":s io.out
 |      "=":s 12:int8 *  'io.out 12 times
