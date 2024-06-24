@@ -19,7 +19,7 @@
 6. keywords preferred, symbols where necessary
 
 
-```elixir
+```ocaml
 // example code
 
 * say-hi (1)
