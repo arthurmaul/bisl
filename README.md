@@ -19,6 +19,18 @@
 6. keywords preferred, symbols where necessary
 
 
-```ocaml
+```elixir
+// example code
+
+* say-hi (1)
+|      "=":s 12:int8 *  'io.out 12 times
+|      "Hello world!":s io.out
+|      "=":s 12:int8 *  'io.out 12 times
+
+say-hi
+// prints:
+// ============
+// Hello world!
+// ============
 
 ```
