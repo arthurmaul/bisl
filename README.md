@@ -23,9 +23,9 @@
 // example code
 
 * say-hi ()
-|      "=":s 12:int8 *  'io.out 12 times
+|      "=":s 12:i8 *  'io.out 12 times
 |      "Hello world!":s io.out
-|      "=":s 12:int8 *  'io.out 12 times
+|      "=":s 12:i8 *  'io.out 12 times
 
 say-hi
 // prints:
