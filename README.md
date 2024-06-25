@@ -7,30 +7,24 @@
 #### A set of principles.
 1. stack based, with reverse polish notation.
 2. actions are organized into a simple set of categories revolving around stack operations:
-   - definition: creates of new variables, data, and quotations
+   - definition: creates of new procedures
    - quotation: passes of defined references to be passed without application
-   - concatenation: composes of quotations into a single quotation
-   - application: removes the quotation and directly evaluates the elements of a quotation
    - manipulation: affects the stack elements and its ordering
    - duplication: copies existing data
-3. simple and clear syntax
+3. simple *~lol* and clear syntax
 4. low level control, direct compilation to native code, and the ability to run on bare metal
 5. no cost abstractions where possible and low cost abstractions where needed
 6. keywords preferred, symbols where necessary
 
 
-```ocaml
+```rust
 // example code
 
-* say-hi ()
-|      "=":s 12:i8 *  'io.out 12 times
-|      "Hello world!":s io.out
-|      "=":s 12:i8 *  'io.out 12 times
+proc greet
+    SYS_write FILENO_stdout "Hello, world!\n"
+    dup memory sub // to get ^^^^^^^^^^^^^^^ length (Δmemory) = memory2 - memory1
+    syscall
+;
 
-say-hi
-// prints:
-// ============
-// Hello world!
-// ============
-
+greet   /* prints Hello, world! */
 ```
