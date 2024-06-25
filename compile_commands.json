@@ -1,0 +1,272 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/io/string/span.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/io/string/span.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/io/format/color/colorscheme.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/io/format/color/colorscheme.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/io/file/reader.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/io/file/reader.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/lexer/lexer.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/lexer/lexer.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/lexer/token.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/lexer/token.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/syntax/primary/block.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/syntax/primary/block.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/syntax/statement/declaration/procedure.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/syntax/statement/declaration/procedure.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/syntax/statement/conditional/if.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/syntax/statement/conditional/if.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/syntax/statement/conditional/while.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/syntax/statement/conditional/while.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/syntax/ast.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/syntax/ast.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/text/parser/parser.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/text/parser/parser.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/compiler/compiler.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/compiler/compiler.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/diagnostic/note.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/diagnostic/note.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/diagnostic/warning.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/diagnostic/warning.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  },
+  {
+    "arguments": [
+      "/usr/bin/distcc",
+      "-c",
+      "c++",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-ggdb",
+      "-std=c++20",
+      "-o",
+      "bin/bisl",
+      "src/bisl/diagnostic/error.cpp"
+    ],
+    "directory": "/home/notflawffles/Projects/bisl",
+    "file": "/home/notflawffles/Projects/bisl/src/bisl/diagnostic/error.cpp",
+    "output": "/home/notflawffles/Projects/bisl/bin/bisl"
+  }
+]

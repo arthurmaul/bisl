@@ -1,0 +1,18 @@
+BasedOnStyle: LLVM
+BreakBeforeBraces: Attach
+IndentWidth: 4
+PointerAlignment: Left
+Language: Cpp
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+SpaceBeforeInheritanceColon: false
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCaseColon: false
+SpaceAfterTemplateKeyword: false
+SpaceAfterCStyleCast: true
+SortIncludes: true
+SeparateDefinitionBlocks: Always
+RequiresClausePosition: SingleLine
+IndentCaseLabels: true
