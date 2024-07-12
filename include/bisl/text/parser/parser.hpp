@@ -4,6 +4,7 @@
 
 #include "../../io/format/types/vector.hpp"
 #include "../lexer/lexer.hpp"
+#include "syntax/annotation/declaration/type/type.hpp"
 #include "syntax/ast.hpp"
 
 namespace bisl::text::parser {
@@ -15,12 +16,13 @@ class Parser {
     diagnostic::DiResult<syntax::AbstractSyntaxTree*,
                          io::format::types::Vector<diagnostic::Diagnostic*>*>
     parse(), parseBlock(const lexer::Token::Type& until), parseNext(),
-        parseName(), parseReservedWord(), parseIfStatement(),
-        parseWhileStatement(), parseProcedureDeclaration();
+        parseOperation(), parseName(), parseReservedWord(), parseIfStatement(),
+        parseDeclaration();
 
-    diagnostic::DiResult<io::format::types::Char*,
+    diagnostic::DiResult<io::format::types::Vector<
+                             syntax::annotation::declaration::type::Type*>*,
                          io::format::types::Vector<diagnostic::Diagnostic*>*>
-    parseDeclarationFlags();
+    parseAnnotations();
 
     diagnostic::DiResult<io::format::types::String*,
                          io::format::types::Vector<diagnostic::Diagnostic*>*>

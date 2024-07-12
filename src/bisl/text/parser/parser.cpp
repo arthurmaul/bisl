@@ -6,11 +6,12 @@
 #include "../../../../include/bisl/compiler/utils/typechecking.hpp"
 #include "../../../../include/bisl/diagnostic/note.hpp"
 #include "../../../../include/bisl/text/parser/parser.hpp"
+#include "../../../../include/bisl/text/parser/syntax/annotation/declaration/type/name.hpp"
+#include "../../../../include/bisl/text/parser/syntax/annotation/declaration/type/reference.hpp"
 #include "../../../../include/bisl/text/parser/syntax/primary/block.hpp"
 #include "../../../../include/bisl/text/parser/syntax/primary/operation/operation.hpp"
 #include "../../../../include/bisl/text/parser/syntax/statement/conditional/if.hpp"
-#include "../../../../include/bisl/text/parser/syntax/statement/conditional/while.hpp"
-#include "../../../../include/bisl/text/parser/syntax/statement/declaration/procedure.hpp"
+#include "../../../../include/bisl/text/parser/syntax/statement/declaration/declaration.hpp"
 
 #define EatAndReturnIfError(types)                                             \
     if (eat(types).isFailure())                                                \
@@ -36,9 +37,7 @@ bisl::text::parser::Parser::parseNext() {
             return parseName();
 
         default:
-            auto value = current.getValue();
-            EatAndReturnIfError({current.getValue()->getType()});
-            return value;
+            return parseOperation();
     }
 }
 
@@ -104,14 +103,21 @@ bisl::text::parser::Parser::parseBlock(const lexer::Token::Type& until) {
 bisl::diagnostic::DiResult<
     bisl::text::parser::syntax::AbstractSyntaxTree*,
     bisl::io::format::types::Vector<bisl::diagnostic::Diagnostic*>*>
+bisl::text::parser::Parser::parseOperation() {
+    auto operation = current.getValue()->cloneAsPointer();
+    EatAndReturnIfError({operation->getType()});
+    return operation;
+}
+
+bisl::diagnostic::DiResult<
+    bisl::text::parser::syntax::AbstractSyntaxTree*,
+    bisl::io::format::types::Vector<bisl::diagnostic::Diagnostic*>*>
 bisl::text::parser::Parser::parseName() {
     if (currentIsReservedWord()) {
         return parseReservedWord();
     }
 
-    auto value = current.getValue();
-    EatAndReturnIfError({current.getValue()->getType()});
-    return value;
+    return parseOperation();
 }
 
 bisl::diagnostic::DiResult<
@@ -124,10 +130,8 @@ bisl::text::parser::Parser::parseReservedWord() {
 
     if (current.getValue()->getValue() == "if") {
         return parseIfStatement();
-    } else if (current.getValue()->getValue() == "while") {
-        return parseWhileStatement();
-    } else if (current.getValue()->getValue() == "proc") {
-        return parseProcedureDeclaration();
+    } else if (current.getValue()->getValue() == "let") {
+        return parseDeclaration();
     }
 
     auto value = current.getValue();
@@ -160,26 +164,61 @@ bisl::text::parser::Parser::parseIfStatement() {
 bisl::diagnostic::DiResult<
     bisl::text::parser::syntax::AbstractSyntaxTree*,
     bisl::io::format::types::Vector<bisl::diagnostic::Diagnostic*>*>
-bisl::text::parser::Parser::parseWhileStatement() {
+bisl::text::parser::Parser::parseDeclaration() {
     EatAndReturnIfError({lexer::Token::Type::Identifier});
-    DefineAndReturnIfError(body, parseBlock(lexer::Token::Type::SemiColon));
+    DefineAndReturnIfError(name, getName());
+    DefineAndReturnIfError(annotations, parseAnnotations());
+    EatAndReturnIfError({lexer::Token::Type::Assign});
+    DefineAndReturnIfError(value, parseBlock(lexer::Token::Type::SemiColon));
 
-    return new syntax::statement::conditional::While(
-        dynamic_cast<syntax::primary::Block*>(body.getValue()));
+    return new syntax::statement::declaration::Declaration(
+        *name.getValue(), annotations.getValue(),
+        dynamic_cast<syntax::primary::Block*>(value.getValue()));
 }
 
 bisl::diagnostic::DiResult<
-    bisl::text::parser::syntax::AbstractSyntaxTree*,
+    bisl::io::format::types::Vector<
+        bisl::text::parser::syntax::annotation::declaration::type::Type*>*,
     bisl::io::format::types::Vector<bisl::diagnostic::Diagnostic*>*>
-bisl::text::parser::Parser::parseProcedureDeclaration() {
-    EatAndReturnIfError({lexer::Token::Type::Identifier});
-    DefineAndReturnIfError(name, getName());
-    EatAndReturnIfError({lexer::Token::Type::Identifier});
-    DefineAndReturnIfError(body, parseBlock(lexer::Token::Type::SemiColon));
+bisl::text::parser::Parser::parseAnnotations() {
+    auto annotations =
+        new Vec(syntax::annotation::declaration::type::Type*, {});
 
-    return new syntax::statement::declaration::Procedure(
-        *name.getValue(),
-        dynamic_cast<syntax::primary::Block*>(body.getValue()));
+    while (true) {
+        if (current.isFailure()) {
+            return new Vec(diagnostic::Diagnostic*, {current.getError()});
+        } else if (current.getValue()->getType() ==
+                   lexer::Token::Type::Assign) {
+            break;
+        }
+
+        unsigned long long int referenceDepth = 0;
+
+        while (current.isSuccess() &&
+               current.getValue()->getType() == lexer::Token::Type::Ampersand) {
+            referenceDepth++;
+            EatAndReturnIfError({lexer::Token::Type::Ampersand});
+        }
+
+        auto name = getName();
+
+        auto type = new syntax::annotation::declaration::type::Type(
+            syntax::annotation::declaration::type::Type::Kind::Name);
+
+        type = new syntax::annotation::declaration::type::Name(
+            name.getValue(), name.getValue()->getSpan());
+
+        EatAndReturnIfError({lexer::Token::Type::Identifier});
+
+        for (unsigned long long int index = 0; index < referenceDepth;
+             index++) {
+            type = new syntax::annotation::declaration::type::Reference(type);
+        }
+
+        annotations->push_back(type);
+    }
+
+    return annotations;
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,

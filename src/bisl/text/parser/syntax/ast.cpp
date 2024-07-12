@@ -9,6 +9,9 @@ bisl::text::parser::syntax::AbstractSyntaxTree::getTypeAsString() const {
         case Type::Statement:
             return "Statement";
 
+        case Type::Annotation:
+            return "Annotation";
+
         default:
             return "Unreachable";
     }

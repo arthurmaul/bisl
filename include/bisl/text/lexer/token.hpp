@@ -15,39 +15,14 @@ class Token: public parser::syntax::primary::opertion::Operation {
         Character,
         String,
 
-        Plus,
-        Minus,
-        Asterisk,
-        Slash,
-        Modulo,
         Ampersand,
         Pipe,
-        Caret,
-        Tilde,
-        DoubleLessThan,
-        DoubleGreaterThan,
-        Exclamation,
         Assign,
-        ExclamationAssign,
-        DoubleAssign,
-        DoubleAmpersand,
-        DoublePipe,
-        LessThan,
-        GreaterThan,
-        LessThanAssign,
-        GreaterThanAssign,
-        PlusAssign,
-        MinusAssign,
-        AsteriskAssign,
-        SlashAssign,
-        ModuloAssign,
-        AmpersandAssign,
-        PipeAssign,
-        CaretAssign,
-        DoubleLessThanAssign,
-        DoubleGreaterThanAssign,
 
+        Colon,
         SemiColon,
+        QuestionMark,
+        Arrow,
 
         Unhandled,
         EndOfFile
@@ -70,6 +45,8 @@ class Token: public parser::syntax::primary::opertion::Operation {
 
     std::string getTypeAsString() const;
     static std::string getTypeAsString(const Token::Type& type);
+
+    Token* cloneAsPointer() const { return new Token(*this); }
 
     std::string format() override;
 

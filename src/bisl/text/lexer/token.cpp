@@ -17,101 +17,26 @@ std::string bisl::text::lexer::Token::getTypeAsString() const {
         case Type::String:
             return "String";
 
-        case Type::Plus:
-            return "`+`";
-
-        case Type::Minus:
-            return "`-`";
-
-        case Type::Asterisk:
-            return "`*`";
-
-        case Type::Slash:
-            return "`/`";
-
-        case Type::Modulo:
-            return "`%`";
-
         case Type::Ampersand:
             return "`&`";
 
         case Type::Pipe:
             return "`|`";
 
-        case Type::Caret:
-            return "`^`";
-
-        case Type::Tilde:
-            return "`~`";
-
-        case Type::DoubleLessThan:
-            return "`<<`";
-
-        case Type::DoubleGreaterThan:
-            return "`>>`";
-
-        case Type::Exclamation:
-            return "`!`";
-
         case Type::Assign:
             return "`=`";
 
-        case Type::ExclamationAssign:
-            return "`!=`";
-
-        case Type::DoubleAssign:
-            return "`==`";
-
-        case Type::DoubleAmpersand:
-            return "`&&`";
-
-        case Type::DoublePipe:
-            return "`||`";
-
-        case Type::LessThan:
-            return "`<`";
-
-        case Type::GreaterThan:
-            return "`>";
-
-        case Type::LessThanAssign:
-            return "`<=`";
-
-        case Type::GreaterThanAssign:
-            return "`>=`";
-
-        case Type::PlusAssign:
-            return "`+=`";
-
-        case Type::MinusAssign:
-            return "`-=`";
-
-        case Type::AsteriskAssign:
-            return "`*=`";
-
-        case Type::SlashAssign:
-            return "`/=`";
-
-        case Type::ModuloAssign:
-            return "`%=`";
-
-        case Type::AmpersandAssign:
-            return "`&=`";
-
-        case Type::PipeAssign:
-            return "`|=`";
-
-        case Type::CaretAssign:
-            return "`^=`";
-
-        case Type::DoubleLessThanAssign:
-            return "`<<=`";
-
-        case Type::DoubleGreaterThanAssign:
-            return "`>>=`";
+        case Type::Colon:
+            return "`:`";
 
         case Type::SemiColon:
-            return ";";
+            return "`;`";
+
+        case Type::QuestionMark:
+            return "`?`";
+
+        case Type::Arrow:
+            return "`->`";
 
         case Type::Unhandled:
             return "Unhandled";

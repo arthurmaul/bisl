@@ -5,7 +5,7 @@
 namespace bisl::text::parser::syntax {
 class AbstractSyntaxTree: io::format::Display {
   public:
-    enum class Type { Primary, Statement, Anotation };
+    enum class Type { Primary, Statement, Annotation };
 
     AbstractSyntaxTree(const Type& type): type(type) {}
 

@@ -15,11 +15,9 @@ class Lexer {
           current(source.getReader().getValue()->readAll()[*span.getIndex()]) {}
 
     diagnostic::DiResult<Token*, diagnostic::Diagnostic*> lexNext(),
-        lexIdentifier(), lexNumber(), lexCharacter(), lexString(), lexPlus(),
-        lexMinus(), lexAsterisk(), lexSlash(), lexModulo(), lexAmpersand(),
-        lexPipe(), lexCaret(), lexTilde(), lexLessThan(), lexGreaterThan(),
-        lexExclamation(), lexAssign(), lexSemiColon(), lexUnhandled(),
-        lexEndOfFile(),
+        lexIdentifier(), lexNumber(), lexCharacter(), lexString(), lexArrow(),
+        lexSlash(), lexAmpersand(), lexPipe(), lexColon(), lexAssign(),
+        lexSemiColon(), lexQuestionMark(), lexUnhandled(), lexEndOfFile(),
         advanceWithResult(
             const diagnostic::DiResult<Token*, diagnostic::Diagnostic*>
                 & result);

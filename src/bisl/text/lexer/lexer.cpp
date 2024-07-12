@@ -21,41 +21,17 @@ bisl::text::lexer::Lexer::lexNext() {
         case '\"':
             return lexString();
 
-        case '+':
-            return lexPlus();
-
         case '-':
-            return lexMinus();
-
-        case '*':
-            return lexAsterisk();
+            return lexArrow();
 
         case '/':
             return lexSlash();
-
-        case '%':
-            return lexModulo();
 
         case '&':
             return lexAmpersand();
 
         case '|':
             return lexPipe();
-
-        case '^':
-            return lexCaret();
-
-        case '~':
-            return lexTilde();
-
-        case '<':
-            return lexLessThan();
-
-        case '>':
-            return lexGreaterThan();
-
-        case '!':
-            return lexExclamation();
 
         case '=':
             return lexAssign();
@@ -195,47 +171,16 @@ bisl::text::lexer::Lexer::lexString() {
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
                            bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexPlus() {
-    auto start = span.clone().withLengthOf(1);
+bisl::text::lexer::Lexer::lexArrow() {
+    auto start = span.clone();
+    advance();
 
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::PlusAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Plus, start);
+    if (current == '>') {
+        return advanceWithResult(
+            new Token(Token::Type::Arrow, start.withLengthOf(2)));
     }
-}
 
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexMinus() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::MinusAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Minus, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexAsterisk() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::AsteriskAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Asterisk, start);
-    }
+    return new Token(Token::Type::Unhandled, start.withLengthOf(1));
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
@@ -244,10 +189,6 @@ bisl::text::lexer::Lexer::lexSlash() {
     auto start = span.clone().withLengthOf(1);
 
     switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::SlashAssign, start.withLengthOf(2)));
-
         case '/':
             while (advance() != '\n')
                 ;
@@ -285,174 +226,36 @@ bisl::text::lexer::Lexer::lexSlash() {
         }
 
         default:
-            return new Token(Token::Type::Slash, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexModulo() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::ModuloAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Modulo, start);
+            return new Token(Token::Type::Unhandled, start);
     }
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
                            bisl::diagnostic::Diagnostic*>
 bisl::text::lexer::Lexer::lexAmpersand() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::AmpersandAssign, start.withLengthOf(2)));
-
-        case '&':
-            return advanceWithResult(
-                new Token(Token::Type::DoubleAmpersand, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Ampersand, start);
-    }
+    return advanceWithResult(
+        new Token(Token::Type::Ampersand, span.clone().withLengthOf(1)));
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
                            bisl::diagnostic::Diagnostic*>
 bisl::text::lexer::Lexer::lexPipe() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::PipeAssign, start.withLengthOf(2)));
-
-        case '|':
-            return advanceWithResult(
-                new Token(Token::Type::DoublePipe, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Pipe, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexCaret() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::CaretAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Caret, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexTilde() {
     return advanceWithResult(
-        new Token(Token::Type::Tilde, span.clone().withLengthOf(1)));
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexLessThan() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::LessThanAssign, start.withLengthOf(2)));
-
-        case '<':
-            switch (advance()) {
-                case '=':
-                    return advanceWithResult(
-                        new Token(Token::Type::DoubleLessThanAssign,
-                                  start.withLengthOf(3)));
-
-                default:
-                    return new Token(Token::Type::DoubleLessThan,
-                                     span.withLengthOf(2));
-            }
-
-        default:
-            return new Token(Token::Type::LessThan, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexGreaterThan() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(new Token(Token::Type::GreaterThanAssign,
-                                               start.withLengthOf(2)));
-
-        case '>':
-            switch (advance()) {
-                case '=':
-                    return advanceWithResult(
-                        new Token(Token::Type::DoubleGreaterThanAssign,
-                                  start.withLengthOf(3)));
-
-                default:
-                    return new Token(Token::Type::DoubleGreaterThan,
-                                     span.withLengthOf(2));
-            }
-
-        default:
-            return new Token(Token::Type::GreaterThan, start);
-    }
-}
-
-bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
-                           bisl::diagnostic::Diagnostic*>
-bisl::text::lexer::Lexer::lexExclamation() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(new Token(Token::Type::ExclamationAssign,
-                                               start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Exclamation, start);
-    }
+        new Token(Token::Type::Ampersand, span.clone().withLengthOf(1)));
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
                            bisl::diagnostic::Diagnostic*>
 bisl::text::lexer::Lexer::lexSemiColon() {
     return advanceWithResult(
-        new Token(Token::Type::SemiColon, span.withLengthOf(1)));
+        new Token(Token::Type::SemiColon, span.clone().withLengthOf(1)));
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
                            bisl::diagnostic::Diagnostic*>
 bisl::text::lexer::Lexer::lexAssign() {
-    auto start = span.clone().withLengthOf(1);
-
-    switch (advance()) {
-        case '=':
-            return advanceWithResult(
-                new Token(Token::Type::DoubleAssign, start.withLengthOf(2)));
-
-        default:
-            return new Token(Token::Type::Assign, start);
-    }
+    return advanceWithResult(
+        new Token(Token::Type::Assign, span.clone().withLengthOf(1)));
 }
 
 bisl::diagnostic::DiResult<bisl::text::lexer::Token*,
